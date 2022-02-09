@@ -135,3 +135,89 @@ button:is(:disabled, :hover) {
 video.your-video {
     display: none;
 }
+
+#share {
+    position: absolute;
+    top: 10px;
+    color: white;
+    right: 10px;
+}
+
+#popup {
+    background: #e0e0e0;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 10px 20px #00000033;
+    top: 50%;
+    left: 50%;
+    border-radius: 0.5em;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    transition: 0.3s opacity ease-in-out;
+}
+
+#popup.dismissed {
+    opacity: 0;
+}
+
+#popup hr {
+    width: 90%;
+}
+
+#close {
+    color: #b0b0b0;
+    position: absolute;
+    top: 5px;
+    font-size: 1.5em;
+    right: -5px;
+}
+
+.input-group {
+    display: flex;
+}
+
+.input-field {
+    flex: 1;
+}
+
+.input-field:not(:first-child) {
+    border-left: 0;
+}
+.input-field:not(:last-child) {
+    border-right: 0;
+}
+
+.input-item {
+    background-color: var(--secondary);
+    font: inherit;
+    font-weight: normal;
+}
+
+.input-field,
+.input-item {
+    border: 1px solid #93806c40;
+    padding: 0.5em 0.75em;
+}
+
+.input-field:first-child,
+.input-item:first-child {
+    border-radius: 5px 0 0 5px;
+}
+
+.input-field:last-child,
+.input-item:last-child {
+    border-radius: 0 5px 5px 0;
+}
+
+#is-copied.copied {
+    opacity: 100;
+}
+
+#is-copied {
+    opacity: 0;
+    transition: opacity 0.25s ease-in;
+    color: #8f8d8d;
+    padding: 20px;
+}

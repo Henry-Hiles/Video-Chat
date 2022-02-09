@@ -1,6 +1,8 @@
 const socket = io("/")
 const videos = document.getElementById("videos")
 const myPeer = new Peer()
+const popup = document.querySelector("#popup")
+const hrefInput = document.querySelector("#href")
 const myVideo = document.createElement("video")
 
 myVideo.muted = true
@@ -84,6 +86,23 @@ const addVideoStream = (video, stream, isYours) => {
     video.controls = "controls"
     videos.append(video)
 }
+
+document
+    .querySelector("#share")
+    .addEventListener("click", () => popup.classList.remove("dismissed"))
+
+hrefInput.value = window.location.href
+
+document.querySelector("#copy").addEventListener("click", () => {
+    hrefInput.focus()
+    hrefInput.select()
+    navigator.clipboard.writeText(hrefInput.value)
+    document.querySelector("#is-copied").classList.add("copied")
+})
+
+document
+    .querySelector("#close")
+    .addEventListener("click", () => popup.classList.add("dismissed"))
 
 navigator.mediaDevices
     .getUserMedia({
