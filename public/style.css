@@ -144,7 +144,8 @@ video.your-video {
 }
 
 #popup {
-    background: #e0e0e0;
+    background: var(--primary);
+    color: white;
     position: absolute;
     display: flex;
     align-items: center;
@@ -166,6 +167,7 @@ video.your-video {
 
 #popup hr {
     width: 90%;
+    border-color: var(--secondary);
 }
 
 #close {
