@@ -154,12 +154,14 @@ video.your-video {
     left: 50%;
     border-radius: 0.5em;
     transform: translate(-50%, -50%);
+    max-width: 95%;
     width: 500px;
     transition: 0.3s opacity ease-in-out;
 }
 
 #popup.dismissed {
     opacity: 0;
+    display: none;
 }
 
 #popup hr {
