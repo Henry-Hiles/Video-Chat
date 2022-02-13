@@ -72,6 +72,7 @@ const dragElement = (element) => {
 }
 
 const connectToNewUser = (userId, stream) => {
+    console.log("somebody joined", stream, userId)
     const call = myPeer.call(userId, stream)
     const video = document.createElement("video")
 
@@ -138,6 +139,7 @@ navigator.mediaDevices
 socket.on("user-disconnected", (userId) => {
     const call = myPeer.connections[userId]
     if (call) call[0].close()
+    console.log("somebody left", userId)
 })
 
 myPeer.on("open", (id) => socket.emit("join-room", ROOM_ID, id))
