@@ -115,29 +115,30 @@ document
     .querySelector("#close")
     .addEventListener("click", () => popup.classList.add("dismissed"))
 
-navigator.mediaDevices
-    .getUserMedia({
-        video: true,
-        audio: true,
-    })
-    .then((stream) => {
-        console.log("You connected")
-        addVideoStream(myVideo, stream, true)
-        myPeer.on("call", (call) => {
-            call.answer(stream)
-            const video = document.createElement("video")
-            call.on("close", () => video.remove())
-            call.on("stream", (userVideoStream) =>
-                addVideoStream(video, userVideoStream)
-            )
+myPeer.on("open", (id) =>
+    navigator.mediaDevices
+        .getUserMedia({
+            video: true,
+            audio: true,
         })
+        .then((stream) => {
+            console.log("You connected")
+            addVideoStream(myVideo, stream, true)
+            myPeer.on("call", (call) => {
+                call.answer(stream)
+                const video = document.createElement("video")
+                call.on("close", () => video.remove())
+                call.on("stream", (userVideoStream) =>
+                    addVideoStream(video, userVideoStream)
+                )
+            })
 
-        socket.on("user-connected", (userId) =>
-            connectToNewUser(userId, stream)
-        )
-
-        myPeer.on("open", (id) => socket.emit("join-room", ROOM_ID, id))
-    })
+            socket.on("user-connected", (userId) =>
+                connectToNewUser(userId, stream)
+            )
+            socket.emit("join-room", ROOM_ID, id)
+        })
+)
 
 socket.on("user-disconnected", (userId) => {
     const call = myPeer.connections[userId]
