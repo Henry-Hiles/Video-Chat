@@ -134,6 +134,7 @@ navigator.mediaDevices
         socket.on("user-connected", (userId) =>
             connectToNewUser(userId, stream)
         )
+        myPeer.on("open", (id) => socket.emit("join-room", ROOM_ID, id))
     })
 
 socket.on("user-disconnected", (userId) => {
@@ -141,5 +142,3 @@ socket.on("user-disconnected", (userId) => {
     if (call) call[0].close()
     console.log("somebody left", userId)
 })
-
-myPeer.on("open", (id) => socket.emit("join-room", ROOM_ID, id))
