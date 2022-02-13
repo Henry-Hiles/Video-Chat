@@ -121,6 +121,7 @@ navigator.mediaDevices
         audio: true,
     })
     .then((stream) => {
+        console.log("You connected")
         addVideoStream(myVideo, stream, true)
         myPeer.on("call", (call) => {
             call.answer(stream)
@@ -134,6 +135,7 @@ navigator.mediaDevices
         socket.on("user-connected", (userId) =>
             connectToNewUser(userId, stream)
         )
+
         myPeer.on("open", (id) => socket.emit("join-room", ROOM_ID, id))
     })
 
