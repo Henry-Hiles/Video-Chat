@@ -1,12 +1,3 @@
-const socket = io("/")
-const videos = document.getElementById("videos")
-const myPeer = new Peer()
-const popup = document.querySelector("#popup")
-const hrefInput = document.querySelector("#href")
-const myVideo = document.createElement("video")
-
-myVideo.muted = true
-
 const dragElement = (element) => {
     let startX, startY, startWidth, startHeight
 
@@ -71,77 +62,31 @@ const dragElement = (element) => {
     element.addEventListener("touchstart", dragMouseDown)
 }
 
-const connectToNewUser = (userId, stream) => {
-    console.log("somebody joined", stream, userId)
+export const addVideoStream = (videoContainer, username, stream, isYours) => {
+    const videos = document.querySelector("#videos")
+
+    const video = videoContainer.querySelector("video")
+    video.srcObject = stream
+    video.addEventListener("loadedmetadata", () => video.play())
+    if (isYours) {
+        video.muted = true
+        videoContainer.classList.add("your-video")
+        videos.append(videoContainer)
+        return dragElement(videoContainer)
+    }
+
+    videoContainer.querySelector(".name").innerText = username
+
+    videos.append(videoContainer)
+}
+
+export const connectToNewUser = (userId, username, stream) => {
     const call = myPeer.call(userId, stream)
-    const video = document.createElement("video")
+    const video = template.content.firstElementChild.cloneNode(true)
 
     call.on("stream", (userVideoStream) =>
-        addVideoStream(video, userVideoStream)
+        addVideoStream(video, username, userVideoStream)
     )
 
     call.on("close", () => video.remove())
 }
-
-const addVideoStream = (video, stream, isYours) => {
-    video.srcObject = stream
-    video.addEventListener("loadedmetadata", () => video.play())
-    if (isYours) {
-        const container = document.createElement("div")
-        container.classList.add("your-video")
-        container.append(video)
-        videos.append(container)
-        return dragElement(container)
-    }
-
-    video.controls = "controls"
-    videos.append(video)
-}
-
-document
-    .querySelector("#share")
-    .addEventListener("click", () => popup.classList.remove("dismissed"))
-
-hrefInput.value = window.location.href
-
-document.querySelector("#copy").addEventListener("click", () => {
-    hrefInput.focus()
-    hrefInput.select()
-    navigator.clipboard.writeText(hrefInput.value)
-    document.querySelector("#is-copied").classList.add("copied")
-})
-
-document
-    .querySelector("#close")
-    .addEventListener("click", () => popup.classList.add("dismissed"))
-
-myPeer.on("open", (id) =>
-    navigator.mediaDevices
-        .getUserMedia({
-            video: true,
-            audio: true,
-        })
-        .then((stream) => {
-            console.log("You connected")
-            addVideoStream(myVideo, stream, true)
-            myPeer.on("call", (call) => {
-                call.answer(stream)
-                const video = document.createElement("video")
-                call.on("close", () => video.remove())
-                call.on("stream", (userVideoStream) =>
-                    addVideoStream(video, userVideoStream)
-                )
-            })
-
-            socket.on("user-connected", (userId) =>
-                connectToNewUser(userId, stream)
-            )
-            socket.emit("join-room", ROOM_ID, id)
-        })
-)
-
-socket.on("user-disconnected", (userId) => {
-    const call = myPeer.connections[userId]
-    if (call) call[0].close()
-    console.log("somebody left", userId)
-})

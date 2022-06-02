@@ -1,6 +1,7 @@
 :root {
     --primary: #14bbaa;
     --secondary: #2c3c4c;
+    --input-border: #858282;
 }
 
 *,
@@ -23,18 +24,11 @@ body {
     overflow: hidden;
 }
 
-nav {
-    background-color: var(--secondary);
-    color: white;
+#go {
+    margin: 0;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    max-width: 100vw;
-    padding: 20px;
-}
-
-nav a {
-    font-size: 1.5em;
+    flex-direction: column;
+    justify-content: center;
 }
 
 a {
@@ -44,12 +38,14 @@ a {
     color: white;
     grid-template-columns: 1fr 500px;
 }
+main {
+    background-color: var(--secondary);
+}
 
 #videos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(33%, 1fr));
     grid-template-rows: repeat(auto-fit, minmax(33%, 1fr));
-    background-color: var(--secondary);
     color: white;
     padding: 4px 0 4px 0;
     gap: 2px;
@@ -105,7 +101,7 @@ button {
     color: #f5f0f0;
     background-color: transparent;
     font-size: 1em;
-    padding: 0.7rem 1.6rem;
+    padding: 10px 12px;
     text-decoration: none;
 }
 
@@ -128,7 +124,7 @@ button:not(:disabled) {
     cursor: pointer;
 }
 
-button:is(:disabled, :hover) {
+:is(button, .button):is(:disabled, :hover) {
     filter: brightness(0.9);
 }
 
@@ -136,11 +132,52 @@ video.your-video {
     display: none;
 }
 
-#share {
+#options {
     position: absolute;
     top: 10px;
-    color: white;
     right: 10px;
+    display: flex;
+}
+
+.card {
+    background-color: #00000050;
+    color: white;
+    padding: 0 10px;
+    z-index: 2;
+    border-radius: 10px;
+}
+
+.jumbo {
+    margin: 20px auto;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 40px;
+}
+
+.jumbo p {
+    text-align: center;
+}
+
+hr {
+    width: 100%;
+}
+
+.video .name {
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+    display: flex;
+    padding: 10px;
+}
+
+.video.your-video .name {
+    display: none;
+}
+
+.video:not(.your-video) {
+    position: relative;
 }
 
 #popup {
@@ -165,11 +202,6 @@ video.your-video {
     display: none;
 }
 
-#popup hr {
-    width: 90%;
-    border-color: var(--secondary);
-}
-
 #close {
     color: #b0b0b0;
     position: absolute;
@@ -182,7 +214,24 @@ video.your-video {
     display: flex;
 }
 
+.medium-header {
+    display: flex;
+    font-size: 4rem;
+    font-weight: 250;
+    line-height: 1.2;
+    margin: 10px;
+}
+
+.large-header {
+    display: flex;
+    font-size: 5rem;
+    font-weight: 300;
+    line-height: 1.2;
+    margin: 10px;
+}
+
 .input-field {
+    border-left: 1px solid var(--input-border) !important;
     flex: 1;
 }
 
@@ -197,10 +246,13 @@ video.your-video {
     background-color: var(--secondary);
     font: inherit;
     font-weight: normal;
+    border-right: 1px solid var(--input-border) !important;
 }
 
 .input-field,
 .input-item {
+    border-top: 1px solid var(--input-border) !important;
+    border-bottom: 1px solid var(--input-border) !important;
     border: 1px solid #93806c40;
     padding: 0.5em 0.75em;
 }
@@ -224,4 +276,45 @@ video.your-video {
     transition: opacity 0.25s ease-in;
     color: #8f8d8d;
     padding: 20px;
+}
+
+@media (max-width: 500px) {
+    #login input {
+        max-width: 60vw;
+    }
+}
+
+#login {
+    background-color: var(--primary);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+#login.done {
+    display: none;
+}
+
+#login:not(.done) + div,
+#login:not(.done) + div + div {
+    display: none !important;
+}
+
+:is(textarea, input[type="text"]) {
+    border: none;
+    color: white;
+    background-color: transparent;
+    border-bottom: 0.05em solid white;
+    font-family: inherit;
+    font-size: 2rem;
+    max-width: 100%;
+    max-height: 90%;
+}
+
+:is(textarea, input[type="text"])::placeholder {
+    color: #dbcece;
 }
