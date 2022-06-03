@@ -13,11 +13,17 @@ const yourName = localStorage.getItem("name")
 if (yourName) nameDisplay.innerText = yourName
 else login.classList.remove("done")
 
-if (nameButton)
-    nameButton.addEventListener("click", () => {
-        if (!nameInput.value) return (nameInput.required = true)
-        document.querySelector("#login").classList.add("done")
-        localStorage.setItem("name", nameInput.value)
-        nameDisplay.innerText = nameInput.value
-        socket.emit("name-change", nameInput.value)
-    })
+const validate = () => {
+    if (!nameInput.value) return (nameInput.required = true)
+    document.querySelector("#login").classList.add("done")
+    localStorage.setItem("name", nameInput.value)
+    nameDisplay.innerText = nameInput.value
+    socket.emit("name-change", nameInput.value)
+}
+
+if (nameButton) nameButton.addEventListener("click", validate)
+if (nameInput)
+    nameInput.addEventListener(
+        "keydown",
+        (event) => event.keyCode == "13" && validate()
+    )

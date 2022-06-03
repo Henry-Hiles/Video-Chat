@@ -36,8 +36,6 @@ myPeer.on("open", async (id) => {
         )
             return showNoVideoPrompt()
 
-        console.log(error.name)
-
         throw error
     }
 

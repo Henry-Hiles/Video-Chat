@@ -4,10 +4,12 @@ import { type } from "./utils.js"
 const input = document.querySelector("#go-input")
 
 input.addEventListener("keydown", (event) => {
-    if (event.code == "Space") {
+    if (event.keyCode == "32") {
         event.preventDefault()
-        type("-")
-    } else if (!/^[-a-z0-9]+$/i.test(event.key)) event.preventDefault()
+        return type("-")
+    }
+    if (event.keyCode === 13) return (location.href = input.value)
+    if (!/^[-a-z0-9]+$/i.test(event.key)) event.preventDefault()
 })
 
 const setHref = () =>
