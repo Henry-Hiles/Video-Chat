@@ -42,7 +42,7 @@ const dragElement = (element) => {
     }
 
     const resizer = document.createElement("div")
-    resizer.className = "resizer"
+    resizer.classList.add("resizer")
     element.appendChild(resizer)
     resizer.addEventListener("mousedown", initDrag)
     resizer.addEventListener("touchstart", initDrag)
@@ -58,7 +58,10 @@ const dragElement = (element) => {
         document.addEventListener("mouseup", () => removeFunctions())
     }
 
-    element.addEventListener("mousedown", dragMouseDown)
+    element.addEventListener(
+        "mousedown",
+        (event) => event.button == 0 && dragMouseDown(event)
+    )
     element.addEventListener("touchstart", dragMouseDown)
 }
 
@@ -80,13 +83,28 @@ export const addVideoStream = (videoContainer, username, stream, isYours) => {
     videos.append(videoContainer)
 }
 
-export const connectToNewUser = (userId, username, stream) => {
+export const showNoVideoPrompt = () =>
+    document.querySelector("#novideo").classList.add("show")
+
+export const connectToNewUser = (userId, username, stream, myPeer) => {
     const call = myPeer.call(userId, stream)
-    const video = template.content.firstElementChild.cloneNode(true)
+    const video = document
+        .querySelector("#video-template")
+        .content.firstElementChild.cloneNode(true)
 
     call.on("stream", (userVideoStream) =>
         addVideoStream(video, username, userVideoStream)
     )
 
     call.on("close", () => video.remove())
+}
+
+export const type = (newText) => {
+    const element = document.activeElement
+    element.setRangeText(
+        newText,
+        element.selectionStart,
+        element.selectionEnd,
+        "end"
+    )
 }

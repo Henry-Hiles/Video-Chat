@@ -21,7 +21,6 @@ body {
     height: 100vh;
     grid-auto-rows: 100vh;
     display: grid;
-    overflow: hidden;
 }
 
 #go {
@@ -32,12 +31,12 @@ body {
 }
 
 a {
-    margin: 0 0.5em;
     text-decoration: none;
     width: fit-content;
     color: white;
     grid-template-columns: 1fr 500px;
 }
+
 main {
     background-color: var(--secondary);
 }
@@ -47,13 +46,14 @@ main {
     grid-template-columns: repeat(auto-fit, minmax(33%, 1fr));
     grid-template-rows: repeat(auto-fit, minmax(33%, 1fr));
     color: white;
-    padding: 4px 0 4px 0;
+    max-height: 100vh;
+    background-color: var(--secondary);
     gap: 2px;
 }
 
 video {
     width: 100%;
-    max-height: 100%;
+    max-height: 100vh;
 }
 
 .your-video {
@@ -109,13 +109,6 @@ button {
     background-color: var(--primary);
 }
 
-.medium-header {
-    font-size: 2.5rem;
-    font-weight: 200;
-    line-height: 1.2;
-    margin-bottom: 20px;
-}
-
 .button-secondary {
     background-color: var(--secondary);
 }
@@ -148,12 +141,13 @@ video.your-video {
 }
 
 .jumbo {
-    margin: 20px auto;
-    width: 50%;
+    margin: 10% auto;
+    width: 90%;
+    max-width: 700px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 40px;
+    padding: 20px 30px;
 }
 
 .jumbo p {
@@ -166,10 +160,11 @@ hr {
 
 .video .name {
     position: absolute;
-    bottom: 5px;
-    left: 10px;
+    bottom: 2vw;
+    left: 2vw;
     display: flex;
-    padding: 10px;
+    font-size: 1.5vw;
+    padding: 1vw;
 }
 
 .video.your-video .name {
@@ -210,13 +205,9 @@ hr {
     right: -5px;
 }
 
-.input-group {
-    display: flex;
-}
-
 .medium-header {
     display: flex;
-    font-size: 4rem;
+    font-size: 3em;
     font-weight: 250;
     line-height: 1.2;
     margin: 10px;
@@ -230,9 +221,24 @@ hr {
     margin: 10px;
 }
 
+.input-group {
+    display: flex;
+    max-width: 90%;
+}
+
+.input-field:first-child,
+.input-item:first-child {
+    border-radius: 5px 0 0 5px;
+}
+
+.input-field:last-child,
+.input-item:last-child {
+    border-radius: 0 5px 5px 0;
+}
+
 .input-field {
     border-left: 1px solid var(--input-border) !important;
-    flex: 1;
+    width: 90%;
 }
 
 .input-field:not(:first-child) {
@@ -257,16 +263,6 @@ hr {
     padding: 0.5em 0.75em;
 }
 
-.input-field:first-child,
-.input-item:first-child {
-    border-radius: 5px 0 0 5px;
-}
-
-.input-field:last-child,
-.input-item:last-child {
-    border-radius: 0 5px 5px 0;
-}
-
 #is-copied.copied {
     opacity: 100;
 }
@@ -284,10 +280,13 @@ hr {
     }
 }
 
-#login {
+#login,
+#novideo {
     background-color: var(--primary);
     color: white;
     display: flex;
+    position: absolute;
+    z-index: 5;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -295,13 +294,22 @@ hr {
     width: 100vw;
 }
 
+#novideo:not(.show),
 #login.done {
     display: none;
 }
 
-#login:not(.done) + div,
-#login:not(.done) + div + div {
-    display: none !important;
+#novideo p {
+    font-size: 1.3em;
+    margin: 10px auto;
+}
+
+#novideo * {
+    text-align: center;
+}
+
+#novideo a {
+    text-decoration: underline;
 }
 
 :is(textarea, input[type="text"]) {
@@ -310,7 +318,7 @@ hr {
     background-color: transparent;
     border-bottom: 0.05em solid white;
     font-family: inherit;
-    font-size: 2rem;
+    font-size: 1.3em;
     max-width: 100%;
     max-height: 90%;
 }
