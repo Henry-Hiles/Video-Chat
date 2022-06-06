@@ -1,29 +1,34 @@
-const socket = io("/")
-const login = document.querySelector("#login")
 const nameButton = document.querySelector("#name")
 const nameInput = document.querySelector("#name-input")
 const nameDisplay = document.querySelector("#name-display")
 
+const loginURL = new URL("login", window.location.origin)
+try {
+    loginURL.searchParams.append("roomId", ROOM_ID)
+} catch (error) {
+    if (!error instanceof ReferenceError) throw error
+}
+
 document
     .querySelector("#change-name")
-    .addEventListener("click", () => login.classList.remove("done"))
+    ?.addEventListener("click", () => (window.location = loginURL))
 
 const yourName = localStorage.getItem("name")
 
-if (yourName) nameDisplay.innerText = yourName
-else login.classList.remove("done")
+if (!yourName && window.location.pathname != "/login")
+    window.location = loginURL
+if (yourName && nameDisplay) nameDisplay.innerText = yourName
 
 const validate = () => {
     if (!nameInput.value) return (nameInput.required = true)
-    document.querySelector("#login").classList.add("done")
     localStorage.setItem("name", nameInput.value)
-    nameDisplay.innerText = nameInput.value
-    socket.emit("name-change", nameInput.value)
+
+    window.location.href =
+        new URLSearchParams(window.location.search).get("roomId") || "/"
 }
 
-if (nameButton) nameButton.addEventListener("click", validate)
-if (nameInput)
-    nameInput.addEventListener(
-        "keydown",
-        (event) => event.keyCode == "13" && validate()
-    )
+nameButton?.addEventListener?.("click", validate)
+nameInput?.addEventListener?.(
+    "keydown",
+    (event) => event.keyCode == "13" && validate()
+)

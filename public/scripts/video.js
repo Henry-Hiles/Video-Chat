@@ -2,10 +2,14 @@ import { addVideoStream, connectToNewUser, showNoVideoPrompt } from "./utils.js"
 const socket = io("/")
 const myPeer = new Peer()
 const template = document.querySelector("#video-template")
-const yourName = localStorage.getItem("name")
 
 myPeer.on("open", async (id) => {
     try {
+        while (!localStorage.getItem("name")) {
+            await new Promise((resolve) => setTimeout(resolve, 2000))
+        }
+        const yourName = localStorage.getItem("name")
+
         const stream = await navigator.mediaDevices.getUserMedia({
             video: true,
             audio: true,
@@ -28,13 +32,7 @@ myPeer.on("open", async (id) => {
             connectToNewUser(userId, username, stream, myPeer)
         )
     } catch (error) {
-        if (
-            error.name == "NotAllowedError" ||
-            error.name == "NotFoundError" ||
-            error.name == "PermissionDeniedError" ||
-            error.name == "DevicesNotFoundError"
-        )
-            return showNoVideoPrompt()
+        if (error instanceof DOMException) return showNoVideoPrompt()
 
         throw error
     }

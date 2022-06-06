@@ -9,6 +9,8 @@ app.use(express.static("public"))
 
 app.get("/", (_, res) => res.render("index"))
 
+app.get("/login", (_, res) => res.render("login"))
+
 app.get("/:room", (req, res) => res.render("room", { roomId: req.params.room }))
 
 const users = {}
@@ -25,12 +27,6 @@ io.on("connection", (socket) =>
         })
 
         socket.on("get-username", (userId, callback) => callback(users[userId]))
-
-        socket.on("name-change", (name) => {
-            users[userId] = name
-
-            socket.to(roomId).emit("name-changed", userId)
-        })
     })
 )
 
