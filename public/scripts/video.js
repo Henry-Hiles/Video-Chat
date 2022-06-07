@@ -1,4 +1,9 @@
-import { addVideoStream, connectToNewUser, showNoVideoPrompt } from "./utils.js"
+import {
+    addVideoStream,
+    connectToNewUser,
+    showNoVideoPrompt,
+    toggleFullscreen,
+} from "./utils.js"
 const socket = io("/")
 const myPeer = new Peer()
 const template = document.querySelector("#video-template")
@@ -8,6 +13,11 @@ myPeer.on("open", async (id) => {
         while (!localStorage.getItem("name")) {
             await new Promise((resolve) => setTimeout(resolve, 2000))
         }
+
+        document
+            .querySelector("#fullscreen")
+            .addEventListener("click", toggleFullscreen)
+
         const yourName = localStorage.getItem("name")
 
         const stream = await navigator.mediaDevices.getUserMedia({

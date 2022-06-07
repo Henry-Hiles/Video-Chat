@@ -72,9 +72,16 @@ export const addVideoStream = (videoContainer, username, stream, isYours) => {
     video.srcObject = stream
     if (CSS.supports("::-webkit-media-controls-panel"))
         video.controls = "controls"
-    video.addEventListener("loadedmetadata", () => video.play())
+    video.addEventListener("loadedmetadata", async () => {
+        try {
+            await video.play()
+        } catch (error) {
+            if (error instanceof DOMException)
+                document.querySelector("#deniedautoplay").classList.add("show")
+            else throw error
+        }
+    })
     if (isYours) {
-        video.muted = true
         videoContainer.classList.add("your-video")
         videos.append(videoContainer)
         return dragElement(videoContainer)
@@ -84,6 +91,11 @@ export const addVideoStream = (videoContainer, username, stream, isYours) => {
 
     videos.append(videoContainer)
 }
+
+export const toggleFullscreen = () =>
+    document.fullscreenElement
+        ? document?.exitFullscreen?.()
+        : document.documentElement?.requestFullscreen?.()
 
 export const showNoVideoPrompt = () =>
     document.querySelector("#novideo").classList.add("show")
