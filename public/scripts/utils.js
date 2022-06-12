@@ -73,6 +73,7 @@ export const addVideoStream = (videoContainer, username, stream, isYours) => {
     if (CSS.supports("::-webkit-media-controls-panel"))
         video.controls = "controls"
     video.addEventListener("loadedmetadata", async () => {
+        video.muted = true
         try {
             await video.play()
         } catch (error) {
