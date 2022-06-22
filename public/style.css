@@ -106,25 +106,24 @@ video::-webkit-media-controls-current-time-display {
 }
 
 button,
-#stop-call {
+.button {
     border: none;
     border-radius: 2em;
     color: #f5f0f0;
     background-color: transparent;
     font-size: 1em;
-    padding: 10px 12px;
     text-decoration: none;
 }
 
-#stop-call:hover {
-    color: #ff0000;
+:is(button, .button):not(.icon) {
+    padding: 8px 12px;
 }
 
 #stop-call {
-    margin-right: 5px;
-    margin-top: 2px;
-    color: #cf2f2f;
-    text-decoration: underline;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #cf2f2f;
 }
 
 .button-primary {
@@ -150,14 +149,22 @@ video.your-video {
 #options {
     position: absolute;
     top: 10px;
+    align-items: center;
+    gap: 15px;
     right: 10px;
     display: flex;
+}
+
+#change-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .card {
     background-color: #00000050;
     color: white;
-    padding: 0 10px;
+    padding: 10px;
     z-index: 2;
     border-radius: 10px;
 }
@@ -182,11 +189,10 @@ hr {
 
 .video .name {
     position: absolute;
-    bottom: 2vw;
-    left: 2vw;
+    bottom: 10px;
+    left: 10px;
     display: flex;
-    font-size: 1.5vw;
-    padding: 1vw;
+    font-size: 1em;
 }
 
 .video.your-video .name {
@@ -332,9 +338,6 @@ hr {
 
 :is(#novideo, #deniedautoplay) a {
     text-decoration: underline;
-}
-
-.stop-call {
 }
 
 :is(textarea, input[type="text"]) {

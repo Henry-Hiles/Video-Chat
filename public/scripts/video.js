@@ -42,6 +42,7 @@ myPeer.on("open", async (id) => {
             connectToNewUser(userId, username, stream, myPeer)
         )
     } catch (error) {
+        console.log(error)
         if (error instanceof DOMException) return showNoVideoPrompt()
 
         throw error

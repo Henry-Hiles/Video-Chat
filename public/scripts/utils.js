@@ -70,7 +70,7 @@ export const addVideoStream = (videoContainer, username, stream, isYours) => {
 
     const video = videoContainer.querySelector("video")
     video.srcObject = stream
-    if (CSS.supports("::-webkit-media-controls-panel"))
+    if (CSS.supports("video::-webkit-media-controls-panel"))
         video.controls = "controls"
     video.addEventListener("loadedmetadata", async () => {
         if (isYours) {
