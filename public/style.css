@@ -120,6 +120,7 @@ button,
 }
 
 #stop-call {
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -170,7 +171,7 @@ video.your-video {
 }
 
 .jumbo {
-    margin: 10% auto;
+    margin: 75px auto;
     width: 90%;
     max-width: 700px;
     display: flex;

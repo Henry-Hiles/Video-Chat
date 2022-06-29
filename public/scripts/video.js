@@ -43,7 +43,7 @@ myPeer.on("open", async (id) => {
         )
     } catch (error) {
         console.log(error)
-        if (error instanceof DOMException) return showNoVideoPrompt()
+        if (error instanceof DOMException) return //showNoVideoPrompt()
 
         throw error
     }
