@@ -67,7 +67,8 @@ video {
 
 .your-video {
     position: absolute;
-    width: 250px;
+    width: 25vw;
+    height: 25vh;
     cursor: grab;
     z-index: 1;
 }
