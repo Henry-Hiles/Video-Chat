@@ -1,2 +1,2 @@
-# Zoom Clone
-A simple Web-RTC powered zoom clone that uses PeerJS and Socket.IO.
+# Video Chat
+A simple Web-RTC powered video chat that uses PeerJS and Socket.IO.
