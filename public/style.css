@@ -67,10 +67,9 @@ video {
 
 .your-video {
     position: absolute;
-    width: 25vw;
-    height: 25vh;
     cursor: grab;
     z-index: 1;
+    width: 250px;
 }
 
 .your-video:active {
@@ -86,7 +85,7 @@ video {
     height: 15px;
     background: var(--primary);
     position: absolute;
-    right: 0;
+    right: -7.5px;
     border-radius: 5px;
     bottom: 0;
     cursor: se-resize;
@@ -142,10 +141,6 @@ button:not(:disabled) {
 
 :is(button, .button):is(:disabled, :hover) {
     filter: brightness(0.9);
-}
-
-video.your-video {
-    display: none;
 }
 
 #options {

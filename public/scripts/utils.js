@@ -75,7 +75,11 @@ export const addVideoStream = (videoContainer, username, stream, isYours) => {
     video.addEventListener("loadedmetadata", async () => {
         if (isYours) {
             video.muted = true
+            //videoContainer.style.width = video.videoWidth
+            //videoContainer.style.height = video.videoHeight
+            console.log(video.videoWidth)
         }
+
         try {
             await video.play()
         } catch (error) {
