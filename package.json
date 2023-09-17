@@ -1,17 +1,14 @@
 {
-    "name": "zoom-clone",
-    "version": "1.0.0",
-    "main": "server.js",
-    "author": "Henry Hiles",
-    "type": "module",
-    "license": "ISC",
-    "dependencies": {
-        "ejs": "^3.1.6",
-        "express": "^4.17.2",
-        "socket.io": "^4.5.1",
-        "uuid": "^8.3.2"
-    },
-    "devDependencies": {
-        "@types/socket.io": "^3.0.2"
-    }
+	"name": "zoom-clone",
+	"version": "1.0.0",
+	"main": "server.js",
+	"author": "Henry Hiles",
+	"type": "module",
+	"license": "ISC",
+	"dependencies": {
+		"ejs": "^3.1.6",
+		"express": "^4.17.2",
+		"socket.io": "^4.5.1",
+		"uuid": "^8.3.2"
+	}
 }

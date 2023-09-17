@@ -1,64 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <link rel="stylesheet" href="style.css" />
-        <script src="/socket.io/socket.io.js" defer></script>
-        <script src="scripts/goToRoom.js" type="module" defer></script>
-        <script src="scripts/login.js" defer></script>
-        <title>Video Chat</title>
-    </head>
-    <body>
-        <div id="options" class="card">
-            <div id="change-name">
-                <span id="name-display"></span>
-                <button class="button-circle">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-pencil"
-                        viewBox="0 0 16 16"
-                    >
-                        <path
-                            d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"
-                        />
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <main>
-            <div class="card jumbo">
-                <h1 class="medium-header">Video Chat</h1>
-                <hr />
-                <p>Enter a room name to join or create a room.</p>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/icon.svg" sizes="any" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<link rel="stylesheet" href="style.css" />
+		<script src="/socket.io/socket.io.js" defer></script>
+		<script src="scripts/goToRoom.js" type="module" defer></script>
+		<script src="scripts/login.js" defer></script>
+		<title>Video Chat</title>
+	</head>
+	<body>
+		<div id="options" class="card">
+			<div id="change-name">
+				<span id="name-display"></span>
+				<button class="button-circle">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="16"
+						height="16"
+						fill="currentColor"
+						class="bi bi-pencil"
+						viewBox="0 0 16 16"
+					>
+						<path
+							d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"
+						/>
+					</svg>
+				</button>
+			</div>
+		</div>
+		<main>
+			<div class="card jumbo">
+				<h1 class="medium-header">Video Chat</h1>
+				<hr />
+				<p>Enter a room name to join or create a room.</p>
 
-                <div class="input-group full-border">
-                    <input
-                        type="text"
-                        placeholder="My room name"
-                        id="go-input"
-                        class="input-field"
-                    />
-                    <a class="input-item button" id="go">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            class="bi bi-search"
-                            viewBox="0 0 16 16"
-                        >
-                            <path
-                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
-                            />
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </main>
-    </body>
+				<div class="input-group full-border">
+					<input
+						type="text"
+						placeholder="My room name"
+						id="go-input"
+						class="input-field"
+					/>
+					<a class="input-item button" id="go">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="16"
+							height="16"
+							fill="currentColor"
+							class="bi bi-search"
+							viewBox="0 0 16 16"
+						>
+							<path
+								d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+							/>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</main>
+	</body>
 </html>

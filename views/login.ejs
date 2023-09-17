@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <link rel="stylesheet" href="style.css" />
-        <script src="/socket.io/socket.io.js" defer></script>
-        <script src="scripts/login.js" defer></script>
-        <title>Video Chat</title>
-    </head>
-    <body>
-        <div id="login">
-            <h1 class="medium-header">Choose a name</h1>
-            <div>
-                <input id="name-input" type="text" placeholder="Username" />
-                <button class="button-circle" id="name">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="25"
-                        height="25"
-                        fill="currentColor"
-                        class="bi bi-check-circle-fill"
-                        viewBox="0 0 16 16"
-                    >
-                        <path
-                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"
-                        />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<link rel="stylesheet" href="style.css" />
+		<link rel="icon" type="image/svg+xml" href="/icon.svg" sizes="any" />
+		<script src="/socket.io/socket.io.js" defer></script>
+		<script src="scripts/login.js" defer></script>
+		<title>Video Chat</title>
+	</head>
+	<body>
+		<div id="login">
+			<h1 class="medium-header">Choose a name</h1>
+			<div>
+				<input id="name-input" type="text" placeholder="Username" />
+				<button class="button-circle" id="name">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="25"
+						height="25"
+						fill="currentColor"
+						class="bi bi-check-circle-fill"
+						viewBox="0 0 16 16"
+					>
+						<path
+							d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"
+						/>
+					</svg>
+				</button>
+			</div>
+		</div>
+	</body>
 </html>
